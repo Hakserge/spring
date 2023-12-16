@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        select {
+            width: 100%;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"> logo</nav>
+<body>
+<div class="container">
+    <h1>List Of Student Per Course</h1>
+    <form action="/listStudentPerCourse" method="get">
+        <label for="courseDefId">Course:</label>
+        <select name="courseDefId" id="courseDefId">
+            <option th:each="cour : ${courseDefList}" th:value="${cour.code}" th:text="${cour.name}"></option>
+        </select>
+        <button type="submit">View Student</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Course</th>
+            <!-- Add more columns if needed -->
+        </tr>
+        <tr th:each="stdCour: ${courseList}">
+            <td th:text="${stdCour.studentregistration.studentid.regNo}"></td>
+            <td th:text="${stdCour.studentregistration.studentid.firstName+' '+stdCour.studentregistration.studentid.lastName }"></td>
+            <td th:text="${stdCour.course.cousedefinition.name}"></td>
+            <!-- Add more columns if needed -->
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

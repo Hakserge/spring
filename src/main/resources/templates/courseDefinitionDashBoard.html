@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Dashboard</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .edit-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+        .delete-button {
+            background-color:red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<h1>Course Dashboard</h1>
+<a th:href="@{/showNewCourseDefinitionForm}"  class="edit-button">ADD CourseDefinition</a></br></br>
+
+<table>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="courseDef: ${allcourseDefinitions}">
+        <td th:text="${courseDef.code}"></td>
+         <td th:text="${courseDef.name}"></td>
+        <td th:text="${courseDef.description}"></td>
+
+    <td class="action-button">
+        <a th:href="@{/updateCourseDefinition/{id}(id=${courseDef.code})}" class="edit-button">Edit</a>
+        <a th:href="@{/deleteCourseDefinition/{id}(id=${courseDef.code})}" class="delete-button">Delete</a>
+    </td>
+    </tr>
+
+
+</table>
+</body>
+</html>

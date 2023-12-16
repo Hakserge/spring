@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #007BFF;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 10px;
+            background: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome to Auca Registration PlatForm</h1>
+<a th:href="@{login.html}" class="button">Let Get Started</a>
+</body>
+</html>

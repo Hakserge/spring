@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, date {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .gender-options input[type="radio"] {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: #ff0000;
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<div class="form-container">
+    <h1>Teacher Registration Form</h1>
+    <form id="teacherForm" onsubmit="return validateForm()"  th:action="@{saveTeacher}" th:object="${teacher}" method="post">
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" th:field="*{firstname}"  >
+            <div class="error-message" id="firstnameError"></div>
+        </div>
+        <!-- Last Name -->
+        <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" th:field="*{lastname}">
+            <div class="error-message" id="lastnameError"></div>
+        </div>
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}">
+            <div class="error-message" id="emailError"></div>
+        </div>
+        <!-- Phone Number -->
+        <div class="form-group">
+            <label for="phonenumber">Phone Number</label>
+            <input type="tel" id="phonenumber" th:field="*{phoneNumber}" pattern="[0-9]{10}">
+            <div class="error-message" id="phonenumberError"></div>
+        </div>
+        <!-- Gender -->
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" th:field="*{gender}">
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <div class="error-message" id="genderError"></div>
+        </div>
+        <!-- Degree -->
+        <div class="form-group">
+            <label for="degree">Degree</label>
+            <select id="degree" th:field="*{degree}">
+                <option value="">Select Degree</option>
+                <option value="Bachelor">Bachelor</option>
+                <option value="Master">Master</option>
+                <option value="Doctorate">Doctorate</option>
+                <option value="Professor">Professor</option>
+            </select>
+            <div class="error-message" id="degreeError"></div>
+        </div>
+        <!-- National ID / Passport -->
+        <div class="form-group">
+            <label for="nationalid">National ID/Passport</label>
+            <input type="text" id="nationalid" th:field="*{id_passport}">
+            <div class="error-message" id="nationalidError"></div>
+        </div>
+        <!-- Country -->
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input type="text" id="country" th:field="*{nationality}">
+            <div class="error-message" id="countryError"></div>
+        </div>
+        <!-- Birthdate -->
+        <div class="form-group">
+            <label for="birthdate">Birthdate</label>
+            <input type="date" id="birthdate" th:field="*{birthDate}">
+            <div class="error-message" id="birthdateError"></div>
+        </div>
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+
+        const firstname = document.getElementById('firstname').value;
+        const lastname = document.getElementById('lastname').value;
+        const email = document.getElementById('email').value;
+        const phonenumber = document.getElementById('phonenumber').value;
+        const gender = document.getElementById('gender').value;
+        const degree = document.getElementById('degree').value;
+        const nationalid = document.getElementById('nationalid').value;
+        const country = document.getElementById('country').value;
+        const birthdate = document.getElementById('birthdate').value;
+
+        const firstnameError = document.getElementById('firstnameError');
+        const lastnameError = document.getElementById('lastnameError');
+        const emailError = document.getElementById('emailError');
+        const phonenumberError = document.getElementById('phonenumberError');
+        const genderError = document.getElementById('genderError');
+        const degreeError = document.getElementById('degreeError');
+        const nationalidError = document.getElementById('nationalidError');
+        const countryError = document.getElementById('countryError');
+        const birthdateError = document.getElementById('birthdateError');
+
+        firstnameError.textContent = '';
+        lastnameError.textContent = '';
+        emailError.textContent = '';
+        phonenumberError.textContent = '';
+        genderError.textContent = '';
+        degreeError.textContent = '';
+        nationalidError.textContent = '';
+        countryError.textContent = '';
+        birthdateError.textContent = '';
+
+        if (firstname.trim() === '') {
+            firstnameError.textContent = 'First Name is required';
+            isValid = false;
+        }
+
+        if (lastname.trim() === '') {
+            lastnameError.textContent = 'Last Name is required';
+            isValid = false;
+        }
+
+        if (email.trim() === '') {
+            emailError.textContent = 'Email is required';
+            isValid = false;
+        }
+
+        if (phonenumber.trim() === '' || !/^[0-9]{10}$/.test(phonenumber)) {
+            phonenumberError.textContent = 'Please enter a valid phone number';
+            isValid = false;
+        }
+
+        if (gender === '') {
+            genderError.textContent = 'Gender is required';
+            isValid = false
+        }
+
+        if (degree === '') {
+            degreeError.textContent = 'Degree is required';
+            isValid = false;
+        }
+
+        if (nationalid.trim() === '') {
+            nationalidError.textContent = 'National ID/Passport is required';
+            isValid = false;
+        }
+
+        if (country.trim() === '') {
+            countryError.textContent = 'Country is required';
+            isValid = false;
+        }
+
+        if (birthdate === '') {
+            birthdateError.textContent = 'Birthdate is required';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .form-container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label, input {
+            display: block;
+            margin: 10px 0;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<div class="form-container">
+    <form th:action="@{/saveStudent}" th:object="${student}" method="post">
+
+        <label for="RegNo">Reg Number:</label>
+        <input type="hidden" id="RegNo" th:field="*{regNo}" ><br>
+
+        <label for="FirstName">First Name:</label>
+        <input type="text" id="FirstName" th:field="*{firstName}" required><br>
+
+        <label for="LastName">Last Name:</label>
+        <input type="text" id="LastName" th:field="*{lastName}"  required><br>
+
+        <label for="BirthDate">Birth Date:</label>
+        <input type="date" id="BirthDate" th:field="*{date}"  required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>

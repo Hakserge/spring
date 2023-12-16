@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teacher Dashboard</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007BFF;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .action-buttons a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #333;
+        }
+        .edit-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 8px;
+        }
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 8px;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<h1>Teacher Dashboard</h1>
+<a th:href="@{/showNewTeacherForm}" class="edit-button">ADD Teacher</a></br></br>
+<table>
+    <tr>
+
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>ID/Passport</th>
+        <th>Birth Date</th>
+        <th>Gender</th>
+        <th>Degree</th>
+        <th>Nationality</th>
+
+        <th>Actions</th>
+    </tr>
+
+
+    <tr th:each="teachers: ${allTeacher}">
+        <td th:text="${teachers.firstname}"></td>
+        <td th:text="${teachers.lastname}"></td>
+        <td th:text="${teachers.email}"></td>
+        <td th:text="${teachers.phoneNumber}"></td>
+        <td th:text="${teachers.id_passport}"></td>
+        <td th:text="${teachers.birthDate}"></td>
+        <td th:text="${teachers.gender}"></td>
+        <td th:text="${teachers.degree}"></td>
+        <td th:text="${teachers.nationality}"></td>
+
+        <td class="action-button">
+            <a th:href="@{/updateTeacher/{id}(id=${teachers.id})} " class="edit-button">Edit</a>
+            <a th:href="@{/deleteTeacher/{id}(id=${teachers.id})}" class="delete-button">Delete</a>
+        </td>
+
+    </tr>
+
+</table>
+
+</body>
+</html>

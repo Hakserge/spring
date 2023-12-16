@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Student Registration Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #007BFF;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .dashboard {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<div class="header">
+    <h1>Student Registration Dashboard</h1>
+    <a th:href="@{/showNewStudentRegistrationForm}" class="edit-button">ADD Student Registration </a></br></br>
+</div>
+<div class="dashboard">
+    <table>
+        <tr>
+            <th>Reg Number</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Semester</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="std:${listStudentRegistration}">
+
+            <td th:text="${std.studentid.regNo}"></td>
+            <td th:text="${std.studentid.firstName}"></td>
+            <td th:text="${std.academicunit.name}"></td>
+            <td th:text="${std.semester.name}"></td>
+            <td th:text="${std.registrationDate}"></td>
+            <td class="action-button">
+                <a th:href="@{/updateStudentRegistration/{id}(id=${std.id})} " class="edit-button">Edit</a>
+                <a th:href="@{/deleteStudentRegistration/{id}(id=${std.id})}" class="delete-button">Delete</a>
+            </td>
+
+        </tr>
+
+        <!-- Add more rows as needed -->
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        select {
+            width: 100%;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"> logo</nav>
+<body>
+<div class="container">
+    <h1>List Of Student Per Semester And Department</h1>
+<form action="/studentsBySemesterAndDepartment" method="get">
+    <label for="semesterId1">Semester:</label>
+    <select name="semesterId" id="semesterId1">
+        <option th:each="semester : ${semesterList1}" th:value="${semester.id}" th:text="${semester.name}"></option>
+    </select>
+    <label for="departmentId">Academic Unit:</label>
+    <select name="departmentId" id="departmentId">
+        <option th:each="acad : ${academicUnitList1}" th:value="${acad.code}" th:text="${acad.name}"></option>
+        <!-- Populate academic unit options -->
+    </select>
+    <button type="submit">View Semester and Department</button>
+</form>
+<table>
+    <tr>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Semester</th>
+        <th>Department</th>
+    </tr>
+    <tr th:each="st : ${students1}">
+        <td th:text="${st.studentid.regNo}"></td>
+        <td th:text="${st.studentid.firstName + ' ' + st.studentid.lastName}"></td>
+        <td th:text="${st.semester.name}"></td>
+        <td th:text="${st.academicunit.name}"></td>
+        <!-- Add more columns if needed -->
+    </tr>
+</table>
+</div>

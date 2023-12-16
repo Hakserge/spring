@@ -1,0 +1,54 @@
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stunning Buttons</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        li {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        button {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #button1 { background-color: #3498db; color: #fff; }
+        #button2 { background-color: #e74c3c; color: #fff; }
+        #button3 { background-color: #2ecc71; color: #fff; }
+        #button4 { background-color: #f39c12; color: #fff; }
+        #button5 { background-color: #9b59b6; color: #fff; }
+    </style>
+</head>
+<nav th:include="adminTop.html"> logo</nav>
+<body>
+<ul>
+    <li><button id="button1"><a th:href="@{listStudentPerSemester}">List Student Per Semester</a></button></li><br>
+    <li><button id="button2"><a th:href="@{semesterAndDepartment}">List Student Per Semester And Department</a></button></li><br>
+    <li><button id="button3"><a th:href="@{courseAndSemester}">List Student per Course And Semester</a></button></li><br>
+    <li><button id="button4"><a th:href="@{DepartmentAndSemester}">List Course per Department And Semester</a></button></li><br>
+    <li><button id="button5"><a th:href="@{studentPerCourse}">List Course Per Student </a></button></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        select {
+            height: 38px;
+        }
+        input[type="date"] {
+            height: 38px;
+        }
+        .submit-button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<div class="form-container">
+    <h1>Student Registration Form</h1>
+    <form th:action="@{/saveStudentRegistration}" th:object="${studentRegistration}" method="post">
+        <label for="studentID">Student ID:</label>
+        <select  id="studentID" th:field="*{studentid}" required>
+
+            <option th:each="stud:${studentList}" th:value="${stud.regNo}" th:text="${stud.firstName}"></option>
+
+
+        </select>
+        <label for="registrationDate">Registration Date:</label>
+        <input type="date" id="registrationDate" name="registrationDate" required>
+
+        <label for="department">Department:</label>
+        <select  id="department" th:field="*{academicunit}" required>
+
+            <option th:each="acad:${academicList}" th:value="${acad.code}" th:text="${acad.name}"></option>
+
+            </select>
+                <label for="semester">Semester:</label>
+
+                <select  id="semester" name="semester" th:field="*{semester}" required>
+
+                    <option th:each="sem:${semesterList}" th:value="${sem.id}" th:text="${sem.name}"></option>
+
+                </select>
+      <!--  <label for="status">Status</label>
+        <select id="status" name="eRegistrationStatus" >
+            <option value="PENDING">PENDING</option>
+            <option value="ADMITTED">ADMITTED"</option>
+            <option value="REJECTED">REJECTED</option>
+        </select>
+-->
+
+         <button type="submit" class="submit-button">SAVE</button>
+    </form>
+
+</div>
+</body>
+</html>
+
+
+

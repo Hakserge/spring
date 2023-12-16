@@ -1,0 +1,100 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Colorful Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .submit-button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<nav th:include="adminTop.html"></nav>
+<div class="form-container">
+    <form th:action="@{saveAcademicUnit}" th:object="${academicUnit}" method="post">
+        <div class="form-group">
+            <label for="code">Code:</label>
+            <input type="text" id="code" th:field="*{code}" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" required>
+        </div>
+        <div class="form-group">
+            <label for="unit">Unit:</label>
+            <select id="unit" th:field="*{unit}" required>
+                <option value="PROGRAMME">PROGRAMME</option>
+                <option value="FACULTY">FACULTY</option>
+                <option value="DEPARTMENT">DEPARTMENT</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="parent">Parent:</label>
+            <select id="parent" th:field="*{parentAcademic}" >
+               <option th:each="parent: ${academicUnitList}" th:value="${parent.code}" th:text="${parent.code+'-'+parent.name}"></option>
+            </select>
+        </div>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+</div>
+</body>
+</html>

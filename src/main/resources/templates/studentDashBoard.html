@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .edit-button, .delete-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<h1>Student Dashboard</h1>
+<a th:href="@{/showNewStudentForm}" class="edit-button">ADD Student</a></br></br>
+<table>
+    <tr>
+        <th>Reg Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birth Date</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="student: ${allstudent}">
+
+        <td th:text="${student.regNo}"></td>
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.date}"></td>
+
+
+        <td class="action-buttons">
+            <a th:href="@{/updateStudent/{id}(id=${student.regNo})}"  class="edit-button">Edit</a>
+            <a th:href="@{/deleteStudent/{id}(id=${student.regNo})}" class="delete-button">Delete</a>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

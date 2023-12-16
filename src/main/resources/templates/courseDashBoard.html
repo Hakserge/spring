@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .edit-button, .delete-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+<nav th:include="adminTop.html"></nav>
+<h1>Course Dashboard</h1>
+<a th:href="@{/showNewCourseForm}" class="edit-button">ADD Course</a></br></br>
+<table>
+    <tr>
+      <!--  <th>ID</th>-->
+        <th>Course Definition</th>
+        <th>Academic Unit</th>
+        <th>Teacher</th>
+        <th>Semester</th>
+        <th>Action</th>
+    </tr>
+
+    <tr th:each="cour:${courseList}">
+        <!--   <td th:text="${cour.code}"></td>-->
+           <td th:text="${cour.cousedefinition.name}"></td>
+           <td th:text="${cour.academicunit.name}"></td>
+           <td th:text="${cour.teacher.firstname}"></td>
+           <td th:text="${cour.semester.name}"></td>
+           <td class="action-buttons">
+               <a th:href="@{/updateCourse/{id}(id=${cour.code})}" class="edit-button">Edit</a>
+               <a th:href="@{/deleteCourse/{id}(id=${cour.code})}" class="delete-button">Delete</a>
+           </td>
+       </tr>
+
+   </table>
+   </body>
+   </html>

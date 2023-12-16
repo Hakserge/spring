@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Stunning Form</title>
+    <!-- Your styles and scripts go here -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+        .form-group input[type="text"], .form-group select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group input[type="submit"] {
+            padding: 12px 24px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<div class="container">
+    <h1>Student Course</h1>
+    <form th:action="@{/saveStudentCourse}" th:object="${studentCourse}" method="post">
+
+        <input type="hidden" id="" th:field="*{id}">
+        <div class="form-group">
+            <label for="student_registration">Student Reg</label>
+
+            <select id="student_registration" th:field="*{studentregistration}">
+
+                <option th:each="std:${studentRegistrationList}" th:value="${std.id}" th:text="${std.studentid.firstName}"></option>
+
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label for="course">Course</label>
+            <select id="course" th:field="*{course}">
+                <option th:each="cour:${courseList}" th:value="${cour.code}" th:text="${cour.cousedefinition.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="credits">Credits</label>
+            <input type="text" id="credits" th:field="*{credits}">
+        </div>
+        <div class="form-group">
+            <label for="results">Results</label>
+            <input type="text" id="results" th:field="*{results}">
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Upload</title>
+</head>
+<body>
+<h1>Image Upload</h1>
+
+<form method="post" action="/images" enctype="multipart/form-data">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+  <br>
+  <label for="file">Image:</label>
+  <input type="file" id="file" name="file" accept="image/*" required>
+  <br>
+  <input type="submit" value="Upload">
+</form>
+
+<h2>Images:</h2>
+<ul>
+  <!-- Iterate over images and display them -->
+  <li th:each="image : ${images}">
+    <img th:src="@{'/images/' + ${image.id}}" style="max-width: 200px;">
+    <span th:text="${image.name}"></span>
+  </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .dashboard {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .add-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: block;
+            margin: 20px auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .edit-button{
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+            margin: 0 5px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 8px 16px;
+            margin: 0 5px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .edit-button:hover, .delete-button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<nav th:include="adminTop.html"></nav>
+<body>
+<div class="dashboard">
+    <h1>Student Course Dashboard</h1>
+    <a th:href="@{/showNewStudentCourseForm}" class="edit-button">ADD Student Course </a></br></br>
+    <table>
+        <tr>
+            <th>Reg Number</th>
+            <th>Course</th>
+            <th>Credits</th>
+            <th>Results</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="stdCour:${studentCourseList}">
+            <td th:text="${stdCour.id}"></td>
+            <td th:text="${stdCour.course.cousedefinition.code}"></td>
+            <td th:text="${stdCour.credits}"></td>
+            <td th:text="${stdCour.results}"></td>
+            <td class="action-buttons">
+                <a th:href="@{/updateStudentCourse/{id}(id=${stdCour.id})}" class="edit-button">Edit</a>
+                <a th:href="@{/deleteStudentCourse/{id}(id=${stdCour.id})}" class="delete-button">Delete</a>
+            </td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>
