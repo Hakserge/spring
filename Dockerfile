@@ -1,7 +1,9 @@
  FROM maven:3.8.5-openjdk-17 As bluid
- COPY . .
+ WORKDIR /app
+ COPY . /app
  RUN mvn clean package -DskipTests
  FROM openjdk:17.0.1-jdk-slim
- COPY --from=bluid /target/learnspring-0.0.1-SNAPSHOT.jar learnspring.jar
+ WORKDIR /app
+ COPY --from=bluid app/target/learnspring-0.0.1-SNAPSHOT.jar /app/app.jar
  EXPOSE 8080
- ENTRYPOINT ["java","-jar","learnspring.jar"]
+CMD ["java", "-jar","app.jar"]
